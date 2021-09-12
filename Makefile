@@ -11,6 +11,7 @@ SRC = 	minishell.c \
 		process/utils.c \
 		process/export.c \
 		process/cd.c \
+		process/cd_directions.c \
 		process/exit.c \
 		process/echo.c \
 		process/env.c \

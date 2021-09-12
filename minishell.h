@@ -72,5 +72,12 @@ char *ft_quotes(char *line, int *a, char *tmp, t_parser *parser);
 void skip_spaces(char *line, int *a);
 void redirect(char *line, int *a, int num, t_parser *parser);
 void close_fd(t_parser *parser);
+void	go_cd_empty(t_parser *parser);
+void	go_cd_dot_dot(t_parser *parser);
+void	go_cd_straight(t_parser *parser);
+char	*put_pwd(char *all, int i);
+void	find_chdir_1(t_parser *parser);
+void	find_chdir_0(t_parser *parser);
+
 
 #endif
