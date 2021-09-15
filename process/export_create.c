@@ -1,5 +1,30 @@
 #include "../minishell.h"
 
+char	*ft_strdup1(const char *str)
+{
+	int		i;
+	int		j;
+	char	*str1;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	if (!(str1 = (char*)malloc(sizeof(*str1) * (i + 1))))
+	{
+		return (NULL);
+	}
+	j = 0;
+	while (j < i)
+	{
+		str1[j] = str[j];
+		j++;
+	}
+	str1[j] = '\0';
+	return (str1);
+}
+
 static void	rewrite_malloc(t_parser *parser, char **envp, int a)
 {
 		parser->export[a] = (char *)malloc(sizeof(char)
@@ -33,15 +58,21 @@ int	rewrite_export(char **envp, t_parser *parser)
 		parser->export[a][b + 1] = '\0';
 		parser->env[a][c + 1] = '\0';
 	}
+	parser->line = (char **)malloc(sizeof(char *));
+	parser->line[0] = ft_strdup1("OLDPWD");
+	printf("%s\n", parser->line[0]);
+	unset(parser);
+	free(parser->line[0]);
+	free(parser->line);
 	return (a);
 }
 
-t_parser	export_create(char **envp, t_parser parser)
+void	export_create(char **envp, t_parser *parser)
 {
-	parser.oldpwd = rewrite_export(envp, &parser);
-	parser.export[parser.oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
-	parser.export[parser.oldpwd] = add_signs(parser.export[parser.oldpwd], "OLDPWD");
-	parser.env[parser.oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
-	parser.env[parser.oldpwd] = add_signs(parser.env[parser.oldpwd], "OLDPWD");
+	parser->oldpwd = rewrite_export(envp, &parser);
+	parser->export[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
+	parser->export[parser->oldpwd] = add_signs(parser->export[parser->oldpwd], "OLDPWD");
+	parser->env[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
+	parser->env[parser->oldpwd] = add_signs(parser->env[parser->oldpwd], "OLDPWD");
 	return (parser);
 }

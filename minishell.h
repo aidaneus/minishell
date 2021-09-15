@@ -44,8 +44,8 @@ char			**ft_split(char	const *s, char c);
 int		ft_strncmp(const char *str1, const char *str2, unsigned int len);
 int		ft_isprint(int c);
 // char	*ft_strjoin(char *s1, char *s2);
-int export_add(int a, t_parser *parser, char **line);
-t_parser export_create(char **envp, t_parser parser);
+int	export_add(int a, t_parser *parser, char **line, int c1);
+void	export_create(char **envp, t_parser *parser);
 int		ft_isalpha(int c);
 int check_export(t_parser *parser, int a, int c);
 int	export(t_parser *parser);
@@ -82,4 +82,5 @@ void export_a_to_z(t_parser *parser);
 void export_A_TO_Z(t_parser *parser);
 void export_not_alpha(t_parser *parser);
 void	env(char **env, int oldpwd);
+char	*ft_strdup1(const char *str);
 #endif

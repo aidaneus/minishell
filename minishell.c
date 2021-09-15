@@ -74,9 +74,11 @@ int	main(int argc, char *argv[], char **envp)
 	parser.what = 0;
 	if (!argc || !argv)
 		exit_minishell(&parser);
+	a = -1;
+
 	parser.env = (char **)malloc(sizeof(char *) * 1024);
 	parser.export = (char **)malloc(sizeof(char *) * 1024);
-	parser = export_create(envp, parser);
+	export_create(envp, &parser);
 	while (1)
 	{
 		parse_and_proc(&parser);

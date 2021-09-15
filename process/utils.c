@@ -76,14 +76,15 @@ int check_export_2(t_parser *parser, int a, char **line, int c1)
 			if (c1 == 'e')
 				printf("%s\n", "changing the argument");
 			parser->len = c;
-			export_add(a, parser, line);
+			export_add(a, parser, line, c1);
 			return (-3);
 		}
 	}
 	if (c1 != 'u')
 	{
+		printf("%s\n", line);
 		parser->len = c;
-		export_add(a, parser, line);
+		export_add(a, parser, line, c1);
 	}
 	return (0);
 }
