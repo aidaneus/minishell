@@ -49,7 +49,6 @@ void process(t_parser *parser)
 		exit_minishell(parser);
 	else
 	{
-		//	pid_t pid;
 			 int a = -1;
 			 parser->path = (char*)malloc(sizeof(char) * (6 + ft_strlen(parser->line[0])));
 			parser->path = add_signs(parser->path, "/bin/");
@@ -94,22 +93,26 @@ void    ft_putstr_fd(char *s, int fd)
 
 void    sig_int()
 {
-   printf("\n");
-   rl_on_new_line();
+ ///  printf("\n");
+ 	write(1, "\n\b\b", 3);
+  rl_on_new_line();
     // rl_replace_line("", 0);	
     rl_redisplay();
 	// struct termios	term;
 	// tcgetattr(0, &term);
-	// 	term.c_lflag &= ~(ECHO);
-	// 	term.c_lflag &= ~(ICANON);
-	// 	tcsetattr(0, TCSANOW, &term);
-	// 	tcgetattr(0, &term);
-	// 	term.c_lflag = 0x2020010d;
-	// 	tcsetattr(0, TCSANOW, &term);
+	 //	term.c_lflag &= ~(ECHO);
+	 //	term.c_lflag &= ~(ICANON);
+	 //	tcsetattr(0, TCSANOW, &term);
+	 //	tcgetattr(0, &term);
+	 //	term.c_lflag = 0x2020010d;
+	 //	tcsetattr(0, TCSANOW, &term);
 	// 	// rl_replace_line();
 	// 	write(1, "\n", 1);
 	// 	rl_on_new_line();
 	// 	rl_redisplay();
+		//		write(1, "\n", 1);
+		//	rl_on_new_line();
+		//	rl_replace_line("", 0);
 }
 
 int main(int argc, char *argv[], char **envp)
