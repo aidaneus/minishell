@@ -89,58 +89,18 @@ int	export_add(int a, t_parser *parser, char **line)
 
 int	export(t_parser *parser)
 {
-	int	a;
 	int	i;
 
-	a = 'A';
 	i = 0;
 	parser->len = 0;
 	while (parser->env[parser->len])
 		parser->len++;
 	while (parser->line[++i])
-	{
 		check_export(parser, i, 'e');
-	}
 	if (i != 1)
 		return (0);
-	while (a != 'Z')
-	{
-		i = 0;
-		while (parser->export[i])
-		{
-			if (parser->export[i][0] == a && parser->export[i][0] != '\0')
-			{
-				printf("%s", "declare -x ");
-				printf("%s\n", parser->export[i]);
-			}
-			i++;
-		}
-		a++;
-	}
-	i = -1;
-	while (parser->export[++i])
-	{
-		if (ft_isalpha(parser->export[i][0]) == 0
-			&& parser->export[i][0] != '\0')
-		{
-			printf("%s", "declare -x ");
-			printf("%s\n", parser->export[i]);
-		}
-	}
-	a = 'a';
-	while (a != 'z')
-	{
-		i = 0;
-		while (parser->export[i])
-		{
-			if (parser->export[i][0] == a && parser->export[i][0] != '\0')
-			{
-				printf("%s", "declare -x ");
-				printf("%s\n", parser->export[i]);
-			}
-			i++;
-		}
-		a++;
-	}
+	export_A_TO_Z(parser);
+	export_not_alpha(parser);
+	export_a_to_z(parser);
 	return (0);
 }
