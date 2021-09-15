@@ -39,6 +39,7 @@ $(NAME): $(INCLUDE) $(SRC) $(OBJ)
 	@echo "\n"
 	@echo "\033[0;32mCompiling minishell..."
 	@gcc $(FLAGS) $(SRC) -g -lreadline -L$(HOME)/.brew/opt/readline/lib -I/Users/nhildred/.brew/opt/readline/include -o $(NAME)
+	@rm -rf minishell.dSYM
 	@echo "\n\033[0mDone !"
 
 %.o: %.c
