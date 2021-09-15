@@ -1,5 +1,30 @@
 #include "minishell.h"
 
+int ft_execve(t_parser *parser)
+{
+	int status;
+	pid_t pid;
+	int i = 0;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(parser->path, parser->line, parser->env) == -1)
+		{
+			close_fd(parser);
+			printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+			exit(127);
+		}
+	}
+	else
+	{
+		 waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+    		i = WEXITSTATUS(status);
+	}
+	return (i);
+}
+
 void process(t_parser *parser)
 {
 	//int p = 0;
@@ -24,7 +49,7 @@ void process(t_parser *parser)
 		exit_minishell(parser);
 	else
 	{
-			pid_t pid;
+		//	pid_t pid;
 			 int a = -1;
 			 parser->path = (char*)malloc(sizeof(char) * (6 + ft_strlen(parser->line[0])));
 			parser->path = add_signs(parser->path, "/bin/");
@@ -33,29 +58,23 @@ void process(t_parser *parser)
 				parser->path[a+5] = parser->line[0][a];
 			 }
 			 parser->path[a+5] = '\0';
-			 pid = fork();
-			 if (pid == 0)
-			{
-				if (execve(parser->path, parser->line, parser->env) == -1)
-				{
-					close_fd(parser);
-			 		printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-					//parser->what = 127;
-				//	p = 127;
-					exit(1);
-					//parser->what = 127;
-				}
-			 }
-			 else
-			 {
-				int status;
-				/*if (signal(SIGQUIT, sig_catcher_exec) == SIG_ERR)
-					exit(0xB);
-				if (signal(SIGINT, sig_catcher_exec) == SIG_ERR)
-					exit(0xA);*/
-			 	waitpid(pid, &status, 0);
-				// g_ms.last_cmd_rtn = WEXITSTATUS(status);
-			 }
+			 parser->what = ft_execve(parser);
+			 //printf("%d\n", parser->what);
+			//  pid = fork();
+			//  if (pid == 0)
+			// {
+			// 	if (execve(parser->path, parser->line, parser->env) == -1)
+			// 	{
+			// 		close_fd(parser);
+			//  		printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+			// 		exit(1);
+			// 	}
+			//  }
+			//  else
+			//  {
+			// 	int status;
+			//  	waitpid(pid, &status, 0);
+			//  }
 			 free(parser->path);
 	}
 }

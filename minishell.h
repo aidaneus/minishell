@@ -78,6 +78,6 @@ void	go_cd_straight(t_parser *parser);
 char	*put_pwd(char *all, int i);
 void	find_chdir_1(t_parser *parser);
 void	find_chdir_0(t_parser *parser);
-
+int ft_execve(t_parser *parser);
 
 #endif
