@@ -34,6 +34,9 @@ typedef struct s_parser{
 	int fd;
 	int flag_close;
 	int flag;
+	int bb;
+	int cc;
+	int ll;
 } t_parser;
 
 t_parser			g_ms;

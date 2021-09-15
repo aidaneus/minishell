@@ -6,7 +6,7 @@
 /*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:12:53 by gbump             #+#    #+#             */
-/*   Updated: 2021/09/15 20:12:59 by gbump            ###   ########.fr       */
+/*   Updated: 2021/09/16 02:06:06 by gbump            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	sig_int(int flag)
 
 void	parse_and_proc(t_parser *parser)
 {
-	char		*line1;
+	char			*line1;
 	struct termios	term;
 
 	tcgetattr(0, &term);
@@ -79,7 +79,6 @@ int	main(int argc, char *argv[], char **envp)
 	if (!argc || !argv)
 		exit_minishell(&parser);
 	a = -1;
-
 	parser.env = (char **)malloc(sizeof(char *) * 1024);
 	parser.export = (char **)malloc(sizeof(char *) * 1024);
 	export_create(envp, &parser);
