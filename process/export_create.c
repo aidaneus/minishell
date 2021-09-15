@@ -60,7 +60,6 @@ int	rewrite_export(char **envp, t_parser *parser)
 	}
 	parser->line = (char **)malloc(sizeof(char *));
 	parser->line[0] = ft_strdup1("OLDPWD");
-	printf("%s\n", parser->line[0]);
 	unset(parser);
 	free(parser->line[0]);
 	free(parser->line);
@@ -69,10 +68,9 @@ int	rewrite_export(char **envp, t_parser *parser)
 
 void	export_create(char **envp, t_parser *parser)
 {
-	parser->oldpwd = rewrite_export(envp, &parser);
+	parser->oldpwd = rewrite_export(envp, parser);
 	parser->export[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
 	parser->export[parser->oldpwd] = add_signs(parser->export[parser->oldpwd], "OLDPWD");
 	parser->env[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
 	parser->env[parser->oldpwd] = add_signs(parser->env[parser->oldpwd], "OLDPWD");
-	return (parser);
 }

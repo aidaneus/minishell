@@ -41,7 +41,7 @@ int	ft_execve(t_parser *parser)
 void	sig_int(int flag)
 {
 	(void)flag;
-	write(1, "\n\b\b", 3);
+	write(1, "\n", 3);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -49,7 +49,11 @@ void	sig_int(int flag)
 void	parse_and_proc(t_parser *parser)
 {
 	char		*line1;
+	struct termios	term;
 
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(0, TCSANOW, &term);
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, SIG_IGN);
 	line1 = readline("\033[35mminishell: \033[0;32m");
