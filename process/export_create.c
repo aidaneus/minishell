@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_create.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 01:26:22 by gbump             #+#    #+#             */
+/*   Updated: 2021/09/16 01:26:26 by gbump            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*ft_strdup1(const char *str)
@@ -11,7 +23,8 @@ char	*ft_strdup1(const char *str)
 	{
 		i++;
 	}
-	if (!(str1 = (char*)malloc(sizeof(*str1) * (i + 1))))
+	str1 = (char *)malloc(sizeof(*str1) * (i + 1));
+	if (!(str1))
 	{
 		return (NULL);
 	}
@@ -27,10 +40,10 @@ char	*ft_strdup1(const char *str)
 
 static void	rewrite_malloc(t_parser *parser, char **envp, int a)
 {
-		parser->export[a] = (char *)malloc(sizeof(char)
-				* (ft_strlen(envp[a]) + 3));
-		parser->env[a] = (char *)malloc(sizeof(char)
-				* (ft_strlen(envp[a]) + 1));
+	parser->export[a] = (char *)malloc(sizeof(char)
+			* (ft_strlen(envp[a]) + 3));
+	parser->env[a] = (char *)malloc(sizeof(char)
+			* (ft_strlen(envp[a]) + 1));
 }
 
 int	rewrite_export(char **envp, t_parser *parser)
@@ -58,19 +71,21 @@ int	rewrite_export(char **envp, t_parser *parser)
 		parser->export[a][b + 1] = '\0';
 		parser->env[a][c + 1] = '\0';
 	}
-	parser->line = (char **)malloc(sizeof(char *));
-	parser->line[0] = ft_strdup1("OLDPWD");
-	unset(parser);
-	free(parser->line[0]);
-	free(parser->line);
 	return (a);
 }
 
 void	export_create(char **envp, t_parser *parser)
 {
 	parser->oldpwd = rewrite_export(envp, parser);
+	parser->line = (char **)malloc(sizeof(char *));
+	parser->line[0] = ft_strdup1("OLDPWD");
+	unset(parser);
+	free(parser->line[0]);
+	free(parser->line);
 	parser->export[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
-	parser->export[parser->oldpwd] = add_signs(parser->export[parser->oldpwd], "OLDPWD");
+	parser->export[parser->oldpwd]
+		= add_signs(parser->export[parser->oldpwd], "OLDPWD");
 	parser->env[parser->oldpwd] = (char *)malloc(sizeof(char) * (6 + 1));
-	parser->env[parser->oldpwd] = add_signs(parser->env[parser->oldpwd], "OLDPWD");
+	parser->env[parser->oldpwd]
+		= add_signs(parser->env[parser->oldpwd], "OLDPWD");
 }

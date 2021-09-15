@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_print.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/16 01:27:19 by gbump             #+#    #+#             */
+/*   Updated: 2021/09/16 01:27:24 by gbump            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void export_a_to_z(t_parser *parser)
+void	export_a_to_z(t_parser *parser)
 {
-	int a;
-	int i;
+	int	a;
+	int	i;
 
 	a = 'a';
 	while (a != 'z')
@@ -19,10 +31,10 @@ void export_a_to_z(t_parser *parser)
 	}
 }
 
-void export_A_TO_Z(t_parser *parser)
+void	export_A_TO_Z(t_parser *parser)
 {
-	int a;
-	int i;
+	int	a;
+	int	i;
 
 	a = 'A';
 	i = 0;
@@ -39,9 +51,9 @@ void export_A_TO_Z(t_parser *parser)
 	}
 }
 
-void export_not_alpha(t_parser *parser)
+void	export_not_alpha(t_parser *parser)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (parser->export[++i])
