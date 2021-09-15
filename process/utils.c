@@ -56,7 +56,6 @@ int check_export_2(t_parser *parser, int a, char **line, int c1)
 				break ;
 			b++;
 		}
-//		printf("%d %d %d %s %s\n", ft_strlen(parser->line[a]), l, find_equal(parser->line[a]), parser->line[a], parser->export[c]);
 		if (l == ft_strlen(line[a]) && find_equal(line[a]) == -1)
 		{
 			if (c1 == 'u')
@@ -104,7 +103,7 @@ int check_export(t_parser *parser, int a, int c1)
 			parser->what = 1;
 			return (-1);
 		}
-		if (parser->line[a][b+1] == '=')
+		if (parser->line[a][b + 1] == '=')
 			break ;
 		b++;
 	}

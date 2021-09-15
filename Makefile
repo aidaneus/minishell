@@ -18,6 +18,9 @@ SRC = 	minishell.c \
 		process/pwd.c \
 		process/unset.c \
 		process/process.c \
+		process/export_create.c \
+		process/export_add.c \
+		process/export_print.c \
 		parser/parser.c \
 		parser/parser_utils.c \
 		parser/get_next_line.c \

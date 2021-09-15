@@ -12,17 +12,19 @@
 
 #include "../minishell.h"
 
-void	env(char **env)
+void	env(char **env, int oldpwd)
 {
 	int	i;
 
 	i = 0;
-	while (*env)
+	while (env[i])
 	{
-		if (ft_strlen(env[0]) == 6)
+		if (ft_strlen(env[oldpwd]) == 6 && !env[oldpwd + 1] && i == oldpwd)
+			break ;
+		if (ft_strlen(env[oldpwd]) == 6 && env[oldpwd + 1] && i == oldpwd)
 			env++;
-		if (*env[0] != '\0')
-			printf ("%s\n", *env);
-		env++;
+		if (env[i][0] != '\0')
+			printf ("%s\n", env[i]);
+		i++;
 	}
 }
