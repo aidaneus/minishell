@@ -1,5 +1,16 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/15 20:15:14 by gbump             #+#    #+#             */
+/*   Updated: 2021/09/15 20:16:54 by gbump            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../minishell.h"
 
 static int	process_extra_1(t_parser *parser)
 {
@@ -65,16 +76,18 @@ static int	process_extra_3(t_parser *parser)
 
 void	process(t_parser *parser)
 {
-	 int	a;
-	
-	if (process_extra_1(parser) != 1 && process_extra_2(parser) != 1 && process_extra_3(parser) != 1)
+	int	a;
+
+	if (process_extra_1(parser) != 1 && process_extra_2(parser) != 1
+		&& process_extra_3(parser) != 1)
 	{
 		a = -1;
-		parser->path = (char*)malloc(sizeof(char) * (6 + ft_strlen(parser->line[0])));
+		parser->path = (char *)malloc(sizeof(char)
+				* (6 + ft_strlen(parser->line[0])));
 		parser->path = add_signs(parser->path, "/bin/");
 		while (parser->line[0][++a])
-			parser->path[a+5] = parser->line[0][a];
-		parser->path[a+5] = '\0';
+			parser->path[a + 5] = parser->line[0][a];
+		parser->path[a + 5] = '\0';
 		parser->what = ft_execve(parser);
 		free(parser->path);
 	}
