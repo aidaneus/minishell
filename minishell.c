@@ -33,21 +33,24 @@ int	ft_execve(t_parser *parser)
 		i = 0;
 		while (parser->path1[i])
 		{
-			if (execve(/*parser->path*/ft_strjoin1(parser->path1[i], parser->path), parser->line, parser->env) == -1)
+			if (execve(/*parser->path*/ft_strjoin(parser->path1[i], parser->path), parser->line, parser->env) == -1)
 				a++;
 			i++;
 		}
 		if (a == i)
 		{
-			close_fd(parser);
-			printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-			exit(127);
+			if (execve(parser->line[0], parser->line, parser->env) == -1)
+			{
+				close_fd(parser);
+				printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+				exit(127);
+			}
 		}
-
-	//	signal(SIGINT, &sig_exit);
+	//	signal(SIGINT, &sig_int);
 	}
 	else
 	{
+		i = 0;
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			i = WEXITSTATUS(status);
@@ -91,13 +94,13 @@ void	parse_and_proc(t_parser *parser)
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, SIG_IGN);
 	line1 = readline("\033[35mminishell: \033[0;32m");
-	add_history(line1);
 	if (!line1)
 	{
 		printf("\033[A");
 		printf("\033[35mminishell: \033[0;32mexit\n");
 		exit(0);
 	}
+	add_history(line1);
 	parser->line = ft_parser(line1, parser);
 	if (parser->line[0])
 		process(parser);

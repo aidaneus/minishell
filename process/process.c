@@ -84,27 +84,17 @@ static int	process_extra_3(t_parser *parser)
 void	process(t_parser *parser)
 {
 	int	a;
+
 	if (process_extra_1(parser) != 1 && process_extra_2(parser) != 1
 		&& process_extra_3(parser) != 1)
 	{
 		a = -1;
-		if ((parser->line[0][0] == '.' && parser->line[0][1] == '/') || (parser->line[0][0] == '/'))
-			parser->path = ft_strdup(parser->line[0]);
-		else
-		{
-			parser->path = ft_strjoin1("/", parser->line[0]);
-			parser->path1 = ft_split(getenv("PATH"), ':');
-		}
+		parser->path = ft_strjoin1("/", parser->line[0]);
+		parser->path1 = ft_split(getenv("PATH"), ':');
 		parser->what = ft_execve(parser);
-		if ((parser->line[0][0] == '.' && parser->line[0][1] == '/') || (parser->line[0][0] == '/'))
-			free(parser->path);
-		else
-		{
-			a = -1;
-			free(parser->path);
-			while (parser->path1[++a])
-				free(parser->path1[a]);
-			free(parser->path1);
-		}
+		free(parser->path);
+		while (parser->path1[++a])
+			free(parser->path1[a]);
+		free(parser->path1);
 	}
 }
