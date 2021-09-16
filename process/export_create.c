@@ -68,8 +68,8 @@ int	rewrite_export(char **envp, t_parser *parser)
 				parser->export[a][++b] = '"';
 			b++;
 		}
-		parser->export[a][b + 1] = '\0';
-		parser->env[a][c + 1] = '\0';
+		parser->export[a][b] = '\0';
+		parser->env[a][c] = '\0';
 	}
 	return (a);
 }
