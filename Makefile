@@ -32,15 +32,14 @@ SRC = 	minishell.c \
 		parser/parser_utils2.c \
 		parser/redirects.c \
 
-# OBJ = $(SRC:c=o)
-OBJ = $(patsubst %.c, %.o, $(SRC))
-
+OBJ = $(SRC:c=o)
+#OBJ = $(patsubst %.c, %.o, $(SRC))
 all: $(NAME)
 
 $(NAME): $(INCLUDE) $(SRC) $(OBJ)
 	@echo "\n"
 	@echo "\033[0;32mCompiling minishell..."
-	@gcc $(FLAGS) $(SRC) -g -lreadline -L$(HOME)/.brew/opt/readline/lib -I/Users/nhildred/.brew/opt/readline/include -o $(NAME)
+	@gcc $(FLAGS) $(SRC) -g -lreadline -L/Users/gbump/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include -o $(NAME)
 	@rm -rf minishell.dSYM
 	@echo "\n\033[0mDone !"
 

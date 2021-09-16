@@ -25,6 +25,7 @@
 typedef struct s_parser{
 	char	**env;
 	char	*path;
+	char	*usr_path;
 	char	**line;
 	char	*put;
 	int		what;
@@ -96,4 +97,5 @@ void	export_A_TO_Z(t_parser *parser);
 void	export_not_alpha(t_parser *parser);
 void	env(char **env, int oldpwd);
 char	*ft_strdup1(const char *str);
+void	sig_int(int flag);
 #endif
