@@ -32,6 +32,7 @@ typedef struct s_parser{
 	int		oldpwd;
 	char	**export;
 	int		flag_pipe;
+	int		flag_heredoc;
 	int		flag_redirect;
 	int		i;
 	int		j;
@@ -49,6 +50,9 @@ typedef struct s_parser{
 	int		ll;
 }			t_parser;
 
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+int		heredoc(char *delimeter);
 char	*ft_strchr(const char *str, int s);
 int		ft_strlen(char *str);
 char	**ft_split(char	const *s, char c);

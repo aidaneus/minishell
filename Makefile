@@ -28,6 +28,8 @@ SRC = 	minishell.c \
 		parser/get_next_line_utils.c \
 		parser/env_char.c \
 		parser/quotes.c \
+		parser/heredoc.c \
+		parser/parser_utils2.c \
 		parser/redirects.c \
 
 # OBJ = $(SRC:c=o)
