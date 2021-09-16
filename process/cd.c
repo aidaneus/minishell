@@ -91,6 +91,10 @@ int	go_cd(t_parser *parser)
 		printf("%s %s %s%s\n", "bash:", "cd:",
 			parser->line[1], ": No such file or directory");
 		parser->what = 1;
+		if (parser->pwd1[0])
+			free(parser->pwd1[0]);
+		if (parser->pwd1)
+			free(parser->pwd1);
 		return (-1);
 	}
 	else
