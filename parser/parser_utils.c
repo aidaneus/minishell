@@ -72,3 +72,25 @@ void	skip_spaces(char *line, int *a)
 	while (line[*a] == ' ')
 		(*a)++;
 }
+
+void	read_file(t_parser *parser, char *tmp)
+{
+	int		output;
+	char	*line_gnl;
+
+	if (parser->fd2 == -1)
+	{
+		printf("bash: %s: No such file or directory\n", tmp);
+		parser->what = 1;
+		return ((void ) NULL);
+	}
+	output = get_next_line(parser->fd2, &line_gnl);
+	while (output > 0)
+	{
+		printf("%s\n", line_gnl);
+		free(line_gnl);
+		output = get_next_line(parser->fd2, &line_gnl);
+	}
+	printf("%s\n", line_gnl);
+	free(line_gnl);
+}

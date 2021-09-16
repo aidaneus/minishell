@@ -31,6 +31,7 @@ SRC = 	minishell.c \
 		parser/heredoc.c \
 		parser/parser_utils2.c \
 		parser/redirects.c \
+		parser/close_n_errors.c \
 
 OBJ = $(SRC:c=o)
 #OBJ = $(patsubst %.c, %.o, $(SRC))
