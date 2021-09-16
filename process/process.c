@@ -84,7 +84,6 @@ static int	process_extra_3(t_parser *parser)
 void	process(t_parser *parser)
 {
 	int	a;
-
 	if (process_extra_1(parser) != 1 && process_extra_2(parser) != 1
 		&& process_extra_3(parser) != 1)
 	{
@@ -93,29 +92,19 @@ void	process(t_parser *parser)
 			parser->path = ft_strdup(parser->line[0]);
 		else
 		{
-			parser->path = (char *)malloc(sizeof(char)
-					* (6 + ft_strlen(parser->line[0])));
-			parser->path = add_signs(parser->path, "/bin/");
-			while (parser->line[0][++a])
-				parser->path[a + 5] = parser->line[0][a];
-			parser->path[a + 5] = '\0';
-			a = -1;
-			parser->usr_path = (char *)malloc(sizeof(char)
-					* (6 + 4 + ft_strlen(parser->line[0])));
-			parser->usr_path  = add_signs(parser->usr_path, "/usr/bin/");
-			while (parser->line[0][++a])
-				parser->usr_path[a + 9] = parser->line[0][a];
-			parser->usr_path [a + 9] = '\0';
+			parser->path = ft_strjoin1("/", parser->line[0]);
+			parser->path1 = ft_split(getenv("PATH"), ':');
 		}
-	//	printf("%s\n", parser->path);
-	//	printf("%s\n", parser->usr_path);
 		parser->what = ft_execve(parser);
 		if ((parser->line[0][0] == '.' && parser->line[0][1] == '/') || (parser->line[0][0] == '/'))
 			free(parser->path);
 		else
 		{
-		 	free(parser->path);
-			free(parser->usr_path);		
+			a = -1;
+			free(parser->path);
+			while (parser->path1[++a])
+				free(parser->path1[a]);
+			free(parser->path1);
 		}
 	}
 }
