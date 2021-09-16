@@ -64,7 +64,7 @@ int	rewrite_export(char **envp, t_parser *parser)
 			parser->env[a][c] = envp[a][c];
 			if (envp[a][c] == '=')
 				parser->export[a][++b] = '"';
-			if (envp[a][c] == '\0')
+			if (envp[a][c + 1] == '\0')
 				parser->export[a][++b] = '"';
 			b++;
 		}

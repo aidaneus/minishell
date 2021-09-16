@@ -49,6 +49,7 @@ int	export_add(int a, t_parser *parser, char **line, int c1)
 		en++;
 	}
 	parser->export[parser->len][b] = '\0';
-	parser->env[parser->len][en] = '\0';
+	if (c1 == 'c')
+		parser->env[parser->len][en] = '\0';
 	return (0);
 }
