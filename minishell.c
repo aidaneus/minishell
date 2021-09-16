@@ -30,9 +30,19 @@ int	ft_execve(t_parser *parser)
 	{
 		if (execve(parser->path, parser->line, parser->env) == -1)
 		{
-			close_fd(parser);
-			printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-			exit(127);
+			if (execve(parser->usr_path, parser->line, parser->env) == -1)
+			{
+				close_fd(parser);
+				printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+				exit(127);
+			}
+			///close_fd(parser);
+			///printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+		//	int a = -1;
+			// while (parser->line[++a])
+			// 	free(parser->line[a]);
+			// free(parser->line);
+		///	exit(127);
 		}
 		signal(SIGINT, &sig_exit);
 	}
