@@ -36,7 +36,7 @@ OBJ = $(SRC:c=o)
 #OBJ = $(patsubst %.c, %.o, $(SRC))
 all: $(NAME)
 
-$(NAME): $(INCLUDE) $(SRC) 
+$(NAME): $(INCLUDE) $(SRC) $(OBJ)
 	@echo "\n"
 	@echo "\033[0;32mCompiling minishell..."
 	@gcc $(FLAGS) $(SRC) -g -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include -o $(NAME)
