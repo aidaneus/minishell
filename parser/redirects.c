@@ -71,6 +71,7 @@ void	red_input(char *line, int *a, char *tmp, t_parser *parser)
 	if (parser->flag_redirect == 1)
 	{
 		parser->flag_heredoc = heredoc(tmp);
+		free(tmp);
 		return ((void) NULL);
 	}
 	parser->fd2 = open(tmp, O_RDONLY, 0644);
@@ -101,7 +102,6 @@ void	redirect(char *line, int *a, int num, t_parser *parser)
 		red_input(line, a, tmp, parser);
 	if (parser->flag_heredoc == 1)
 	{
-		line = "";
 		unlink(".heredoc");
 		exit(0);
 	}

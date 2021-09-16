@@ -17,14 +17,22 @@ int	process_heredoc(char *delimiter)
 	char	*line;
 	int		fd;
 
+	line = NULL;
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
-	signal(SIGINT, SIG_DFL);
+	if (signal(SIGINT, SIG_DFL))
+	{
+		free(line);
+		unlink(".heredoc");
+	}
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL || !ft_strncmp(line, delimiter, ft_strlen(line) + 1))
+		{ 
+			unlink(".heredoc");
 			break ;
+		}
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);
@@ -33,6 +41,7 @@ int	process_heredoc(char *delimiter)
 	{
 		printf("\033[A");
 		printf("> warning: here-document is delimited by EOF\n");
+		unlink(".heredoc");
 		exit(0);
 	}
 	free(line), close(fd);
