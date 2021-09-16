@@ -21,11 +21,17 @@
 # include <fcntl.h>
 # include "parser/get_next_line.h"
 # include <termios.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 typedef struct s_parser{
 	char	**env;
 	char	*path;
+	char	**path1;
 	char	*usr_path;
+	char	*usr_path1;
+	char	*usr_path2;
+	char	*usr_path3;
 	char	**line;
 	char	*put;
 	int		what;
@@ -55,6 +61,7 @@ typedef struct s_parser{
 
 void	check_error(char *line, int *a, t_parser *parser);
 void	read_file(t_parser *parser, char *tmp);
+char			**ft_split(char	const *s, char c);
 char	*ft_itoa(int n, t_parser *parser);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
@@ -103,4 +110,6 @@ void	export_not_alpha(t_parser *parser);
 void	env(char **env, int oldpwd);
 char	*ft_strdup1(const char *str);
 void	sig_int(int flag);
+char	*ft_strjoin1(char const *s1, char const *s2);
+
 #endif

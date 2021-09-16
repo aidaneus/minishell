@@ -23,28 +23,28 @@ int	ft_execve(t_parser *parser)
 	int		status;
 	pid_t	pid;
 	int		i;
+	int		a;
 
 	i = 0;
+	a = 0;
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(parser->path, parser->line, parser->env) == -1)
+		i = 0;
+		while (parser->path1[i])
 		{
-			if (execve(parser->usr_path, parser->line, parser->env) == -1)
-			{
-				close_fd(parser);
-				printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-				exit(127);
-			}
-			///close_fd(parser);
-			///printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-		//	int a = -1;
-			// while (parser->line[++a])
-			// 	free(parser->line[a]);
-			// free(parser->line);
-		///	exit(127);
+			if (execve(/*parser->path*/ft_strjoin1(parser->path1[i], parser->path), parser->line, parser->env) == -1)
+				a++;
+			i++;
 		}
-		signal(SIGINT, &sig_exit);
+		if (a == i)
+		{
+			close_fd(parser);
+			printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+			exit(127);
+		}
+
+	//	signal(SIGINT, &sig_exit);
 	}
 	else
 	{
