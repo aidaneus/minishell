@@ -41,7 +41,7 @@ char	*check_env_char(char *line, int *a, char *tmp, t_parser *parser)
 	parser->i = -1;
 	(*a)++;
 	if (line[*a] == '?')
-		printf("%d\n", parser->what);
+		tmp = ft_itoa(parser->what, parser);
 	while ((line[*a] != ' ' && line[*a] != '\0') && parser->env[++parser->i])
 	{
 		parser->j = 0;
