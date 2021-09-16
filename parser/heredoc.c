@@ -19,20 +19,13 @@ int	process_heredoc(char *delimiter)
 
 	line = NULL;
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (signal(SIGINT, SIG_DFL))
-	{
-		free(line);
-		unlink(".heredoc");
-	}
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL || !ft_strncmp(line, delimiter, ft_strlen(line) + 1))
-		{ 
-			unlink(".heredoc");
 			break ;
-		}
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);

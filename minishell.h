@@ -31,6 +31,7 @@ typedef struct s_parser{
 	char	**pwd1;
 	int		oldpwd;
 	char	**export;
+	char 	*itoa;
 	int		flag_pipe;
 	int		flag_heredoc;
 	int		flag_redirect;
@@ -50,6 +51,7 @@ typedef struct s_parser{
 	int		ll;
 }			t_parser;
 
+char	*ft_itoa(int n, t_parser *parser);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 int		heredoc(char *delimeter);
