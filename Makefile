@@ -39,11 +39,7 @@ all: $(NAME)
 $(NAME): $(INCLUDE) $(SRC) 
 	@echo "\n"
 	@echo "\033[0;32mCompiling minishell..."
-<<<<<<< HEAD
 	@gcc $(FLAGS) $(SRC) -g -lreadline -L$(HOME)/.brew/opt/readline/lib -I$(HOME)/.brew/opt/readline/include -o $(NAME)
-=======
-	@gcc $(FLAGS) $(SRC) -g -lreadline -L/$(HOME)/.brew/opt/readline/lib -I/$(HOME)/.brew/opt/readline/include -o $(NAME)
->>>>>>> 3049e86ce5a4843f7db5597f4b5ae0926b1ca24a
 	@rm -rf minishell.dSYM
 	@echo "\n\033[0mDone !"
 
