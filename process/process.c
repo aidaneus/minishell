@@ -60,6 +60,13 @@ static int	process_extra_3(t_parser *parser)
 	else if (parser->line[0][0] == 'e' && parser->line[0][1] == 'n'
 			&& parser->line[0][2] == 'v' && parser->line[0][3] == '\0')
 	{
+		if (parser->line[1][0])
+		{
+			printf("%s %s%s\n", "env:",
+			parser->line[1], ": No such file or directory");
+			parser->what = 127;
+			return (1);
+		}
 		env(parser->env, parser->oldpwd);
 		return (1);
 	}
