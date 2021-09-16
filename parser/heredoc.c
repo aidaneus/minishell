@@ -18,6 +18,8 @@ int	process_heredoc(char *delimiter)
 	int		fd;
 
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		line = readline("> ");
