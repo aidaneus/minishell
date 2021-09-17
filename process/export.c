@@ -12,6 +12,33 @@
 
 #include "../minishell.h"
 
+char	*ft_strjoin1(char const *s1, char const *s2)
+{
+	int		b;
+	int		c;
+	char	*d;
+
+	if (!s1 || !s2)
+		return (NULL);
+	b = ft_strlen((char *)s1);
+	c = ft_strlen((char *)s2);
+	d = (char *)malloc(sizeof(char) * (b + c + 1));
+	if (!(d))
+		return (NULL);
+	c = -1;
+	while (s1[++c])
+		d[c] = s1[c];
+	c = 0;
+	while (s2[c])
+	{
+		d[b] = s2[c];
+		b++;
+		c++;
+	}
+	d[b] = '\0';
+	return (d);
+}
+
 int	export(t_parser *parser)
 {
 	int	i;

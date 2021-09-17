@@ -6,7 +6,7 @@
 /*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:15:14 by gbump             #+#    #+#             */
-/*   Updated: 2021/09/15 20:16:54 by gbump            ###   ########.fr       */
+/*   Updated: 2021/09/17 05:35:01 by gbump            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,27 @@ static int	process_extra_2(t_parser *parser)
 		go_cd(parser);
 		return (1);
 	}
-	return (0);
-}
-
-static int	process_extra_3(t_parser *parser)
-{
-	if (parser->line[0][0] == 'e' && parser->line[0][1] == 'x'
+	else if (parser->line[0][0] == 'e' && parser->line[0][1] == 'x'
 			&& parser->line[0][2] == 'i' && parser->line[0][3] == 't'
 			&& parser->line[0][4] == '\0')
 	{
 		exit_minishell(parser);
 		return (1);
 	}
-	else if (parser->line[0][0] == 'e' && parser->line[0][1] == 'n'
+	return (0);
+}
+
+static int	process_extra_3(t_parser *parser)
+{
+	if (parser->line[0][0] == 'e' && parser->line[0][1] == 'n'
 			&& parser->line[0][2] == 'v' && parser->line[0][3] == '\0')
 	{
 		if (parser->line[1])
 		{
 			printf("%s %s%s\n", "env:",
-			parser->line[1], ": No such file or directory");
+				parser->line[1], ": No such file or directory");
 			parser->what = 127;
-			return (-1);
+			return (1);
 		}
 		env(parser->env, parser->oldpwd);
 		return (1);

@@ -43,12 +43,12 @@ int	ft_execve(t_parser *parser)
 	pid_t	pid;
 	int		i;
 
+	i = 0;
 	pid = fork();
 	if (pid == 0)
 		bin(parser);
 	else
 	{
-		i = 0;
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			i = WEXITSTATUS(status);
