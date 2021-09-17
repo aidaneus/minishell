@@ -56,13 +56,16 @@ char	**check_if_me(char **args, char **tmp, int *b)
 	return (args);
 }
 
-void	check_pipe(char *line, int *a)
+void	check_pipe(char *line, int *a, t_parser *parser)
 {
 	int	b;
 	int	count;
 
 	count = 0;
 	b = 0;
+	skip_spaces(line, a);
+	if (line[*a] == '|')
+		check_error(line, a, parser, 2);
 	while (line[b] != '\0')
 	{
 		if (line[b] == '|')
@@ -86,7 +89,7 @@ char	**ft_parser(char *line, t_parser *parser)
 	a = 0;
 	parser->b = 0;
 	tmp = NULL;
-	check_pipe(line, &a);
+	check_pipe(line, &a, parser);
 	parser->line = (char **)calloc(sizeof(char *), (ft_counter(line) + 1));
 	while (line[a] != '\0')
 	{

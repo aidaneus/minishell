@@ -15,7 +15,7 @@
 char	*func_if(char *line, int *a, char *tmp, t_parser *parser)
 {
 	if (parser->env[parser->i][parser->j] == '='
-		&& (line[*a] == '\0' || line[*a] == ' '
+		&& (line[*a] == '\0' || line[*a] == ' ' || line[*a] == '$'
 		|| (line[*a] == 34 && parser->flag == 1)))
 	{
 		parser->j++;
@@ -36,14 +36,29 @@ char	*func_if(char *line, int *a, char *tmp, t_parser *parser)
 	return (tmp);
 }
 
+void	env_while(char *line, int *a, t_parser *parser)
+{
+	while ((line[*a] != '\0' && line[*a] != ' '))
+	{
+		if (parser->flag == 1 && line[*a] == 34)
+			break ;
+		(*a)++;
+	}
+}
+
 char	*check_env_char(char *line, int *a, char *tmp, t_parser *parser)
 {
 	parser->i = -1;
 	(*a)++;
+	if (line[*a] == '\0' || line[*a] == ' '
+		|| (line[*a] == 34 && parser->flag == 1))
+		return (tmp = ft_strjoin_char(tmp, '$'));
 	if (line[*a] == '?')
 		tmp = ft_itoa(parser->what, parser);
 	while ((line[*a] != ' ' && line[*a] != '\0') && parser->env[++parser->i])
 	{
+		if (line[*a] == '$')
+			return (check_env_char(line, a, tmp, parser));
 		parser->j = 0;
 		if (parser->flag == 1 && line[*a] == 34)
 			break ;
@@ -55,11 +70,6 @@ char	*check_env_char(char *line, int *a, char *tmp, t_parser *parser)
 		}
 		tmp = func_if(line, a, tmp, parser);
 	}
-	while ((line[*a] != '\0' && line[*a] != ' '))
-	{
-		if (parser->flag == 1 && line[*a] == 34)
-			break ;
-		(*a)++;
-	}
+	env_while(line, a, parser);
 	return (tmp);
 }

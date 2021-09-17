@@ -27,13 +27,22 @@ void	close_fd(t_parser *parser)
 		close(parser->fd2);
 }
 
-void	check_error(char *line, int *a, t_parser *parser)
+void	check_error(char *line, int *a, t_parser *parser, int n)
 {
-	parser->flag_exit = 0;
-	if (line[*a] == '\0')
+	if (n == 1)
 	{
-		parser->what = 258;
-		printf("bash: syntax error near unexpected token `newline'\n");
-		parser->flag_exit = 1;
+		parser->flag_exit = 0;
+		if (line[*a] == '\0')
+		{
+			parser->what = 258;
+			printf("bash: syntax error near unexpected token `newline'\n");
+			parser->flag_exit = 1;
+		}
+	}
+	if (n == 2)
+	{
+		printf("bash: syntax error near unexpected token `|'\n");
+		parser->what = 127;
+		return ((void ) NULL);
 	}
 }

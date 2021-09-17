@@ -31,7 +31,7 @@ void	red_output(char *line, int *a, char *tmp, t_parser *parser)
 	parser->fd = 0;
 	check_red(line, a, parser, 1);
 	skip_spaces(line, a);
-	check_error(line, a, parser);
+	check_error(line, a, parser, 1);
 	if (parser->flag == 1)
 		return ((void) NULL);
 	while (line[*a] != ' ' && line[*a] != '\0')
@@ -52,7 +52,7 @@ void	red_input(char *line, int *a, char *tmp, t_parser *parser)
 {
 	check_red(line, a, parser, 2);
 	skip_spaces(line, a);
-	check_error(line, a, parser);
+	check_error(line, a, parser, 1);
 	if (parser->flag_exit == 1)
 		return ((void) NULL);
 	while (line[*a] != ' ' && line[*a] != '\0')

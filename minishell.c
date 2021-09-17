@@ -106,10 +106,10 @@ int	main(int argc, char *argv[], char **envp)
 	t_parser	parser;
 	int			a;
 
-	parser.what = 0;
 	if (!argc || !argv)
 		exit_minishell(&parser);
 	a = -1;
+	parser.what = 0;
 	parser.env = (char **)malloc(sizeof(char *) * 1024);
 	parser.export = (char **)malloc(sizeof(char *) * 1024);
 	export_create(envp, &parser);
