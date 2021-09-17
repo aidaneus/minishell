@@ -39,6 +39,7 @@ int	ft_execve(t_parser *parser)
 		}
 		if (a == i)
 		{
+		//	printf("%s\n", parser->line[0]);
 			if (execve(parser->line[0], parser->line, parser->env) == -1)
 			{
 				close_fd(parser);

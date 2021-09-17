@@ -65,7 +65,7 @@ static int	process_extra_3(t_parser *parser)
 			printf("%s %s%s\n", "env:",
 			parser->line[1], ": No such file or directory");
 			parser->what = 127;
-			return (1);
+			return (-1);
 		}
 		env(parser->env, parser->oldpwd);
 		return (1);
@@ -85,6 +85,7 @@ void	process(t_parser *parser)
 {
 	int	a;
 
+	parser->what = 0;
 	if (process_extra_1(parser) != 1 && process_extra_2(parser) != 1
 		&& process_extra_3(parser) != 1)
 	{
