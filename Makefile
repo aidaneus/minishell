@@ -22,6 +22,7 @@ SRC = 	minishell.c \
 		process/export_add.c \
 		process/export_print.c \
 		process/check.c \
+		process/utils_2.c \
 		parser/parser.c \
 		parser/parser_utils.c \
 		parser/get_next_line.c \

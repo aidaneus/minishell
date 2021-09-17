@@ -6,49 +6,46 @@
 /*   By: gbump <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 20:12:53 by gbump             #+#    #+#             */
-/*   Updated: 2021/09/15 20:12:59 by gbump            ###   ########.fr       */
+/*   Updated: 2021/09/17 05:47:07 by gbump            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void sig_exit(int flag)
+void	bin(t_parser *parser)
 {
-	(void)flag;
-	exit (1);
-	//return ;
+	int	i;
+	int	a;
+
+	i = 0;
+	a = 0;
+	while (parser->path1[i])
+	{
+		if (execve(ft_strjoin(parser->path1[i], parser->path),
+				parser->line, parser->env) == -1)
+			a++;
+		i++;
+	}
+	if (a == i)
+	{
+		if (execve(parser->line[0], parser->line, parser->env) == -1)
+		{
+			close_fd(parser);
+			printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
+			exit(127);
+		}
+	}
 }
+
 int	ft_execve(t_parser *parser)
 {
 	int		status;
 	pid_t	pid;
 	int		i;
-	int		a;
 
-	i = 0;
-	a = 0;
 	pid = fork();
 	if (pid == 0)
-	{
-		i = 0;
-		while (parser->path1[i])
-		{
-			if (execve(/*parser->path*/ft_strjoin(parser->path1[i], parser->path), parser->line, parser->env) == -1)
-				a++;
-			i++;
-		}
-		if (a == i)
-		{
-		//	printf("%s\n", parser->line[0]);
-			if (execve(parser->line[0], parser->line, parser->env) == -1)
-			{
-				close_fd(parser);
-				printf("%s %s%s\n", "bash:", parser->line[0], ": command not found");
-				exit(127);
-			}
-		}
-	//	signal(SIGINT, &sig_int);
-	}
+		bin(parser);
 	else
 	{
 		i = 0;
@@ -61,10 +58,6 @@ int	ft_execve(t_parser *parser)
 
 void	sig_int(int flag)
 {
-	// (void)flag;
-	// write(1, "\n", 3);
-	// rl_on_new_line();
-	// rl_redisplay();
 	int	stat_loc;
 
 	wait(&stat_loc);
@@ -86,7 +79,7 @@ void	sig_int(int flag)
 
 void	parse_and_proc(t_parser *parser)
 {
-	char		*line1;
+	char			*line1;
 	struct termios	term;
 
 	tcgetattr(0, &term);
@@ -117,7 +110,6 @@ int	main(int argc, char *argv[], char **envp)
 	if (!argc || !argv)
 		exit_minishell(&parser);
 	a = -1;
-
 	parser.env = (char **)malloc(sizeof(char *) * 1024);
 	parser.export = (char **)malloc(sizeof(char *) * 1024);
 	export_create(envp, &parser);
@@ -132,4 +124,3 @@ int	main(int argc, char *argv[], char **envp)
 	}
 	return (0);
 }
-
