@@ -21,8 +21,8 @@
 # include <fcntl.h>
 # include "parser/get_next_line.h"
 # include <termios.h>
-#include <sys/types.h>
-#include <dirent.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 typedef struct s_parser{
 	char	**env;
@@ -38,7 +38,7 @@ typedef struct s_parser{
 	char	**pwd1;
 	int		oldpwd;
 	char	**export;
-	char 	*itoa;
+	char	*itoa;
 	int		flag_pipe;
 	int		flag_heredoc;
 	int		flag_redirect;
@@ -61,7 +61,7 @@ typedef struct s_parser{
 
 void	check_error(char *line, int *a, t_parser *parser);
 void	read_file(t_parser *parser, char *tmp);
-char			**ft_split(char	const *s, char c);
+char	**ft_split(char	const *s, char c);
 char	*ft_itoa(int n, t_parser *parser);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
