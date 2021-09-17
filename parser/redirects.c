@@ -89,8 +89,5 @@ void	redirect(char *line, int *a, int num, t_parser *parser)
 	if (num == 2)
 		red_input(line, a, tmp, parser);
 	if (parser->flag_heredoc == 1)
-	{
-		unlink(".heredoc");
 		exit(0);
-	}
 }
