@@ -59,7 +59,7 @@ typedef struct s_parser{
 	int		ll;
 }			t_parser;
 
-void	check_error(char *line, int *a, t_parser *parser);
+void	check_error(char *line, int *a, t_parser *parser, int n);
 void	read_file(t_parser *parser, char *tmp);
 char	**ft_split(char	const *s, char c);
 char	*ft_itoa(int n, t_parser *parser);
